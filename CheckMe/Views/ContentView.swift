@@ -28,23 +28,18 @@ struct ContentView: View {
             UISliderRepresentation(value: $sliderValue, number: $randomNumber)
                 .frame(width: 300, height: 50)
             
-            Button("Проверь меня!") {
-                checkResult()
-            }
+            Button(checkMe) { checkResult() }
             .padding()
             
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("Результат"),
+                Alert(title: Text(result),
                       message: Text(resultMessage),
-                      dismissButton: .default(Text("ОК")))
+                      dismissButton: .default(Text(ok)))
             }
             
-            Button("Начать заново") {
-                restart()
-            }
+            Button(start) { restart() }
             .padding()
         }
-        .padding()
     }
     
     private func restart() {
