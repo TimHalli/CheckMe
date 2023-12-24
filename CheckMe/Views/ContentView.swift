@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var resultMessage = ""
     @State private var sliderValue = Double.random(in: 1...100)
     @State private var randomNumber = Double.random(in: 1...100)
-    
+
     private var distance: Double {
         abs(sliderValue - randomNumber)
     }
@@ -35,15 +35,15 @@ struct ContentView: View {
                 Text("100")
             }
             
-            Button(checkMe) { checkResult() }
+            Button("Проверь меня!") { checkResult() }
             .padding()
             
             .alert(isPresented: $showAlert) {
-                Alert(title: Text(result),
+                Alert(title: Text("Результат"),
                       message: Text(resultMessage),
-                      dismissButton: .default(Text(ok)))
+                      dismissButton: .default(Text("ОК")))
             }
-            Button(start) { restart() }
+            Button("Начать заново") { restart() }
             .padding()
         }
     }

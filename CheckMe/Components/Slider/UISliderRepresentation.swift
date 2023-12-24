@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UISliderRepresentation: UIViewRepresentable {
     @Binding var value: Double
-    var opacity: Double
+    let opacity: Double
     
     func makeUIView(context: Context) -> UISlider {
         let slider = UISlider()
@@ -26,7 +26,6 @@ struct UISliderRepresentation: UIViewRepresentable {
     
     func updateUIView(_ uiView: UISlider, context: Context) {
         uiView.value = Float(value)
-        
         uiView.thumbTintColor = .tintColor.withAlphaComponent(opacity)
     }
     
