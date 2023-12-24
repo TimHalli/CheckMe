@@ -10,23 +10,30 @@ import SwiftUI
 struct ContentView: View {
     @State private var showAlert = false
     @State private var resultMessage = ""
-    @State private var sliderValue: Double = 0
+    @State private var sliderValue = Double.random(in: 1...100)
     @State private var randomNumber = Double.random(in: 1...100)
- 
-    private var header: String {
-        "Продвиньте слайдер, как можно ближе к: \(Int(randomNumber))"
+    
+    private var distance: Double {
+        abs(sliderValue - randomNumber)
     }
     
-    init() {
-        _sliderValue = State(initialValue: randomNumber)
+    private var opacity: Double {
+        Double((80 - distance) / 80)
+    }
+    
+    private var taskName: String {
+        "Продвиньте слайдер, как можно ближе к: \(Int(randomNumber))"
     }
     
     var body: some View {
         VStack {
-            Text(header)
-            
-            UISliderRepresentation(value: $sliderValue, number: $randomNumber)
-                .frame(width: 300, height: 50)
+            Text(taskName)
+            HStack {
+                Text("0")
+                UISliderRepresentation(value: $sliderValue, opacity: opacity)
+                    .frame(width: 300, height: 50)
+                Text("100")
+            }
             
             Button(checkMe) { checkResult() }
             .padding()
@@ -36,7 +43,6 @@ struct ContentView: View {
                       message: Text(resultMessage),
                       dismissButton: .default(Text(ok)))
             }
-            
             Button(start) { restart() }
             .padding()
         }
@@ -44,13 +50,11 @@ struct ContentView: View {
     
     private func restart() {
         randomNumber = Double.random(in: 1...100)
-        sliderValue = Double(self.randomNumber)
+        sliderValue = Double.random(in: 1...100)
     }
     
     private func checkResult() {
-        let distance = abs(sliderValue - randomNumber)
         let percent = 100 - distance
-        
         resultMessage = "Ваш результат: \(Int(percent))%"
         showAlert = true
     }
