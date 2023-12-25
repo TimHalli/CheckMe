@@ -30,7 +30,7 @@ struct UISliderRepresentation: UIViewRepresentable {
     }
     
     internal func makeCoordinator() -> Coordinator {
-        Coordinator(value)
+        Coordinator(self)
     }
 }
 

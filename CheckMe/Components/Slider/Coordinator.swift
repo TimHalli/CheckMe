@@ -8,13 +8,13 @@
 import UIKit
 
 final class Coordinator {
-    var value: Double
+    var parent: UISliderRepresentation
     
-    init(_ value: Double) {
-        self.value = value
+    init(_ parent: UISliderRepresentation) {
+        self.parent = parent
     }
     
     @objc func valueChanged(_ sender: UISlider) {
-        value = Double(sender.value)
+        parent.value = Double(sender.value)
     }
 }
